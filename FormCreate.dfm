@@ -1,77 +1,58 @@
-object Form_Create: TForm_Create
-  Left = 304
-  Top = 238
-  BorderIcons = []
-  BorderStyle = bsDialog
-  Caption = #1053#1086#1074#1072#1103' '#1082#1072#1088#1090#1072
-  ClientHeight = 57
-  ClientWidth = 177
+object CreateForm: TCreateForm
+  Left = 0
+  Top = 0
+  Caption = #1053#1086#1074#1072#1103' '#1083#1086#1082#1072#1094#1080#1103
+  ClientHeight = 86
+  ClientWidth = 271
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Height = -16
+  Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poDesktopCenter
-  OnKeyPress = FormKeyPress
+  Position = poMainFormCenter
+  Scaled = False
+  DesignSize = (
+    271
+    86)
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 19
   object Label1: TLabel
-    Left = 8
-    Top = 8
-    Width = 39
-    Height = 13
-    Caption = #1064#1080#1088#1080#1085#1072
+    Left = 16
+    Top = 11
+    Width = 64
+    Height = 19
+    Caption = #1064#1080#1088#1080#1085#1072':'
   end
   object Label2: TLabel
-    Left = 8
-    Top = 32
-    Width = 38
-    Height = 13
-    Caption = #1042#1099#1089#1086#1090#1072
+    Left = 18
+    Top = 46
+    Width = 58
+    Height = 19
+    Caption = #1042#1099#1089#1086#1090#1072':'
   end
-  object Edit_W: TEdit
-    Left = 56
+  object BitBtn1: TBitBtn
+    Left = 186
     Top = 8
-    Width = 33
-    Height = 21
-    MaxLength = 3
+    Width = 75
+    Height = 25
+    Anchors = [akTop, akRight]
+    DoubleBuffered = True
+    Kind = bkOK
+    ParentDoubleBuffered = False
     TabOrder = 0
-    Text = '50'
-    OnKeyPress = FormKeyPress
   end
-  object Button_Create: TButton
-    Left = 96
-    Top = 8
+  object BitBtn2: TBitBtn
+    Left = 186
+    Top = 39
     Width = 75
-    Height = 21
-    Cursor = crHandPoint
-    Caption = #1057#1086#1079#1076#1072#1090#1100
-    Default = True
-    TabOrder = 2
-    OnClick = Button_CreateClick
-    OnKeyPress = FormKeyPress
-  end
-  object Button_Cancel: TButton
-    Left = 96
-    Top = 32
-    Width = 75
-    Height = 21
-    Cursor = crHandPoint
-    Caption = #1054#1090#1084#1077#1085#1072
-    TabOrder = 3
-    OnClick = Button_CancelClick
-    OnKeyPress = FormKeyPress
-  end
-  object Edit_H: TEdit
-    Left = 56
-    Top = 32
-    Width = 33
-    Height = 21
-    MaxLength = 3
+    Height = 25
+    Anchors = [akTop, akRight]
+    DoubleBuffered = True
+    Kind = bkCancel
+    ParentDoubleBuffered = False
     TabOrder = 1
-    Text = '30'
-    OnKeyPress = FormKeyPress
+    OnClick = BitBtn2Click
   end
 end

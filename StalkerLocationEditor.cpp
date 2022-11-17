@@ -2,34 +2,37 @@
 
 #include <vcl.h>
 #pragma hdrstop
+#include <tchar.h>
 //---------------------------------------------------------------------------
-USEFORM("MainForm.cpp", Form_Main);
-USEFORM("FormCreate.cpp", Form_Create);
+USEFORM("MainForm.cpp", EditorForm);
+USEFORM("FormCreate.cpp", CreateForm);
 //---------------------------------------------------------------------------
-WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
+WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
-        try
-        {
-                 Application->Initialize();
-                 Application->CreateForm(__classid(TForm_Main), &Form_Main);
-                 Application->CreateForm(__classid(TForm_Create), &Form_Create);
-                 Application->Run();
-        }
-        catch (Exception &exception)
-        {
-                 Application->ShowException(&exception);
-        }
-        catch (...)
-        {
-                 try
-                 {
-                         throw Exception("");
-                 }
-                 catch (Exception &exception)
-                 {
-                         Application->ShowException(&exception);
-                 }
-        }
-        return 0;
+	try
+	{
+		Application->Initialize();
+		Application->MainFormOnTaskBar = true;
+		Application->Title = "Stalker Location Editor";
+		Application->CreateForm(__classid(TEditorForm), &EditorForm);
+		Application->CreateForm(__classid(TCreateForm), &CreateForm);
+		Application->Run();
+	}
+	catch (Exception &exception)
+	{
+		Application->ShowException(&exception);
+	}
+	catch (...)
+	{
+		try
+		{
+			throw Exception("");
+		}
+		catch (Exception &exception)
+		{
+			Application->ShowException(&exception);
+		}
+	}
+	return 0;
 }
 //---------------------------------------------------------------------------
