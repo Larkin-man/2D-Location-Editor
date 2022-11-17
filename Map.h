@@ -1,8 +1,8 @@
 //---------------------------------------------------------------------------
+//Мапер 10х10 пикселей
 #ifndef MapH
 #define MapH
 //---------------------------------------------------------------------------
-int const METERS = 40;
 
 TColor SetRGBint(int Red, int Green, int Blue)//макс 255
 {
@@ -20,26 +20,26 @@ class TMap
 {
 private:
 	int FHeight, FWidth;
-	wchar_t *Idents;
-	TStringList *file;
+
 protected:
 	wchar_t GetTile(int i) const	{  return Idents[i];   }
 	UnicodeString GetTileName(int i) { return file->Values[Idents[i]]; }
 public:
-
+	wchar_t *Idents;
+	TStringList *file;
 	typedef struct
 	{
-		int Image;
 		wchar_t Ident;
 		unsigned char Radiation;
 		unsigned char Anomally;
+		int Image;
 		TColor ColorRad;
 		TColor ColorAnom;
+		int Triggger;
+		bool AnomTest;
 		///void ConvertIdent()	{	Image = GetLocationIndex(Ident); }
 		void SetRadiation(int iRadiation);
 		void SetAnomally(int iAnomally);
-		bool AnomTest;
-		int Triggger;
 	} TCell;
 	void Create(int Width, int Height);    //init
 	void Clear();
