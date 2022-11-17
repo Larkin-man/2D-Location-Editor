@@ -3,8 +3,6 @@
 #define MapH
 //---------------------------------------------------------------------------
 int const METERS = 40;
-unsigned char const OSHIFT = 32;
-unsigned char const SSHIFT = 32;
 
 TColor SetRGBint(int Red, int Green, int Blue)//макс 255
 {

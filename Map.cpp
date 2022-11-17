@@ -64,7 +64,7 @@ void TMap::Clear()
 //-------------------------------------------------------------------
 bool TMap::Open(UnicodeString FileName)
 {
-	FILE *fp = fopen (FileName.c_str(), "r");
+	FILE *fp = fopen (FileName.c_str(), "rb");
 	if (!fp)
 	{
 		fclose(fp);
@@ -73,7 +73,7 @@ bool TMap::Open(UnicodeString FileName)
 	int W, H;
 	fread(&W, sizeof(int), 1, fp);
 	fread(&H, sizeof(int), 1, fp);
-	if ((W>1000)||(H>1000)||(W<0)||(H<0))
+	if ((W>9000)||(H>9000)||(W<0)||(H<0))
 	{
 		fclose(fp);
 		throw (ERangeError("Out of range"));
@@ -86,8 +86,6 @@ bool TMap::Open(UnicodeString FileName)
 			fread(&Map.Cell[i][j].Ident, sizeof(char), 1, fp);
 			fread(&Map.Cell[i][j].Radiation, sizeof(unsigned char), 1, fp);
 			fread(&Map.Cell[i][j].Anomally, sizeof(unsigned char), 1, fp);
-			Map.Cell[i][j].Radiation -= OSHIFT;
-			Map.Cell[i][j].Anomally -= OSHIFT;
 			Map.Cell[i][j].Image = GetLocationIndex(Map.Cell[i][j].Ident);//   ConvertIdent();
 			Map.Cell[i][j].ColorAnom = GetAnomallyColor(Map.Cell[i][j].Anomally);
 			Map.Cell[i][j].ColorRad = GetRadiationColor(Map.Cell[i][j].Radiation);
@@ -102,8 +100,7 @@ bool TMap::Open(UnicodeString FileName)
 		{
 			fread(&W, sizeof(int), 1, fp);
 			fread(&H, sizeof(int), 1, fp);
-			fread(&Map.Cell[W-OSHIFT][H-OSHIFT].Triggger, sizeof(int), 1, fp);
-			Map.Cell[W-OSHIFT][H-OSHIFT].Triggger -= OSHIFT;
+			fread(&Map.Cell[W][H].Triggger, sizeof(int), 1, fp);
 		}         //*/
 	}
 	fclose(fp);
@@ -112,7 +109,7 @@ bool TMap::Open(UnicodeString FileName)
 //-------------------------------------------------------------------
 bool TMap::Save(UnicodeString FileName)    //Функция сохраняет список в бинарный файл
 {
-	FILE *fp = fopen (FileName.c_str(), "w");
+	FILE *fp = fopen (FileName.c_str(), "wb");
 	if (!fp)
 	{
 		fclose(fp);
@@ -127,8 +124,8 @@ bool TMap::Save(UnicodeString FileName)    //Функция сохраняет список в бинарный
 		for (int j = 0; j < Map.FHeight; ++j)
 		{
 			fwrite(&Map.Cell[i][j].Ident, sizeof(char), 1, fp);
-			R = Map.Cell[i][j].Radiation + SSHIFT;
-			A = Map.Cell[i][j].Anomally + SSHIFT;
+			R = Map.Cell[i][j].Radiation;
+			A = Map.Cell[i][j].Anomally;
 			fwrite(&R, sizeof(unsigned char), 1, fp);
 			fwrite(&A, sizeof(unsigned char), 1, fp);
 			if (Map.Cell[i][j].Triggger > 0)
@@ -143,8 +140,8 @@ bool TMap::Save(UnicodeString FileName)    //Функция сохраняет список в бинарный
 			for (int j = 0; j < Map.FHeight; ++j)
 				if (Map.Cell[i][j].Triggger > 0)
 				{
-					I = i + SSHIFT; J = j + SSHIFT;
-					T = Map.Cell[i][j].Triggger + SSHIFT;
+					I = i; J = j;
+					T = Map.Cell[i][j].Triggger;
 					fwrite(&I, sizeof(int), 1, fp);
 					fwrite(&J, sizeof(int), 1, fp);
 					fwrite(&T, sizeof(int), 1, fp);
