@@ -19,7 +19,6 @@
 #include "Map.h"
 #include "FormCreate.h"
 #include <Buttons.hpp>
-#include "cspin.h"
 #include <ExtActns.hpp>
 #include <Graphics.hpp>
 

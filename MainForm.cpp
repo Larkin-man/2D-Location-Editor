@@ -7,7 +7,6 @@
 #include "MainForm.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
-#pragma link "cspin"
 #pragma resource "*.dfm"
 TEditorForm *EditorForm;
 //---------------------------------------------------------------------------
