@@ -19,3 +19,4 @@ void __fastcall TCreateForm::BitBtn2Click(TObject *Sender)
 	Close();
 }
 //---------------------------------------------------------------------------
+
