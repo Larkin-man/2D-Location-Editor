@@ -49,6 +49,7 @@
 *.cfg
 #*.hpp
 *Resource.rc
+*.il*
 
 # Delphi local files (user-specific info)
 *.local

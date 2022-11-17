@@ -1,9 +1,9 @@
 object Form_Main: TForm_Main
   Left = 185
   Top = 113
-  Width = 684
-  Height = 467
-  Caption = 'Maps Edit v1.0'
+  Caption = 'Stalker Location Editor'
+  ClientHeight = 408
+  ClientWidth = 668
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,34 +17,37 @@ object Form_Main: TForm_Main
   OnKeyPress = FormKeyPress
   OnResize = FormResize
   DesignSize = (
-    676
-    413)
+    668
+    408)
   PixelsPerInch = 96
   TextHeight = 13
   object Bevel1: TBevel
     Left = 0
     Top = 29
-    Width = 660
-    Height = 348
+    Width = 652
+    Height = 343
     Align = alClient
     Shape = bsFrame
     Style = bsRaised
+    ExplicitWidth = 660
+    ExplicitHeight = 348
   end
   object Image1: TImage
     Left = 8
     Top = 40
     Width = 643
-    Height = 334
+    Height = 314
     Anchors = [akLeft, akTop, akRight, akBottom]
     OnClick = Image1Click
     OnMouseDown = Image1MouseDown
     OnMouseMove = Image1MouseMove
     OnMouseUp = Image1MouseUp
+    ExplicitHeight = 334
   end
   object ScrollBar_G: TScrollBar
     Left = 0
-    Top = 377
-    Width = 676
+    Top = 372
+    Width = 668
     Height = 17
     Cursor = crHandPoint
     Align = alBottom
@@ -57,10 +60,10 @@ object Form_Main: TForm_Main
     OnKeyPress = FormKeyPress
   end
   object ScrollBar_V: TScrollBar
-    Left = 660
+    Left = 652
     Top = 29
     Width = 16
-    Height = 348
+    Height = 343
     Cursor = crHandPoint
     Align = alRight
     Kind = sbVertical
@@ -73,13 +76,13 @@ object Form_Main: TForm_Main
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 676
+    Width = 668
     Height = 29
     Caption = 'ToolBar1'
     TabOrder = 2
     object SpeedButton_P: TSpeedButton
       Left = 0
-      Top = 2
+      Top = 0
       Width = 23
       Height = 22
       Cursor = crHandPoint
@@ -135,7 +138,7 @@ object Form_Main: TForm_Main
     end
     object SpeedButton_C: TSpeedButton
       Left = 23
-      Top = 2
+      Top = 0
       Width = 23
       Height = 22
       Cursor = crHandPoint
@@ -190,7 +193,7 @@ object Form_Main: TForm_Main
     end
     object ToolButton1: TToolButton
       Left = 46
-      Top = 2
+      Top = 0
       Width = 11
       Caption = 'ToolButton1'
       ImageIndex = 0
@@ -199,8 +202,8 @@ object Form_Main: TForm_Main
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 394
-    Width = 676
+    Top = 389
+    Width = 668
     Height = 19
     Panels = <
       item
@@ -221,7 +224,6 @@ object Form_Main: TForm_Main
         Alignment = taCenter
         Width = 50
       end>
-    SimplePanel = False
   end
   object MainMenu1: TMainMenu
     Left = 208
@@ -277,7 +279,6 @@ object Form_Main: TForm_Main
     Top = 64
   end
   object ColorDialog1: TColorDialog
-    Ctl3D = True
     Left = 304
     Top = 64
   end
@@ -288,7 +289,7 @@ object Form_Main: TForm_Main
     Left = 336
     Top = 64
     Bitmap = {
-      494C01010800090004000A000A00FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101080009000C000A000A00FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000280000001E0000000100200000000000C012
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

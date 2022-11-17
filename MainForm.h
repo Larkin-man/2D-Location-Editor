@@ -12,7 +12,7 @@
 #include <Buttons.hpp>
 #include <ComCtrls.hpp>
 #include <ToolWin.hpp>
-#include "TMap.cpp"
+#include "Map.cpp"
 #include <Dialogs.hpp>
 #include <ImgList.hpp>
 //---------------------------------------------------------------------------

@@ -127,7 +127,7 @@ void __fastcall TForm_Main::Image1MouseMove(TObject *Sender,
 		stY = Y;
 	}
 	TPoint p = map->PtC(X, Y);
-	StatusBar1->Panels->Items[0]->Text = IntToStr(p.x) + "	" + IntToStr(p.y);
+	StatusBar1->Panels->Items[0]->Text = IntToStr((int)p.x) + "	" + IntToStr((int)p.y);
 	StatusBar1->Panels->Items[1]->Text = IntToStr(X) + "	" + IntToStr(Y);
 	map->Focus(p, mkL, SpeedButton_C->Down);
 	//if (SpeedButton_C->Down && mkL && map->ResCur)

@@ -1,5 +1,5 @@
 #include <vcl.h>
-#include <vcl\iniFiles.hpp>
+#include <iniFiles.hpp>
 #include <Buttons.hpp>
 #include <ComCtrls.hpp>
 #include <math.h>
