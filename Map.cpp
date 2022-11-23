@@ -63,7 +63,7 @@ void TMap::Clear()
 		}
 }
 //-------------------------------------------------------------------
-bool TMap::Open(String FileName)
+bool TMap::Open(AnsiString FileName)
 {
 	FILE *fp = fopen(FileName.c_str(), "rb");
 	if (!fp)
@@ -107,7 +107,7 @@ bool TMap::Open(String FileName)
 	return true;
  }
 //-------------------------------------------------------------------
-bool TMap::Save(String FileName)    //Функция сохраняет список в бинарный файл
+bool TMap::Save(AnsiString FileName)    //Функция сохраняет список в бинарный файл
 {
 	FILE *fp = fopen (FileName.c_str(), "wb");
 	if (!fp)

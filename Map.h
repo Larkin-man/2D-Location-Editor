@@ -52,8 +52,8 @@ public:
 	__fastcall ~TMap();
 	static TColor GetAnomallyColor(int Power);
 	static TColor GetRadiationColor(int Power);
-	bool Open(UnicodeString FileName); //Функция загружает список из бинарного файла
-	bool Save(UnicodeString FileName);
+	bool Open(AnsiString FileName); //Функция загружает список из бинарного файла
+	bool Save(AnsiString FileName);
 	void AnomallyRun();
 	//Base Tiles
 	void LoadTiles(const UnicodeString FileName);

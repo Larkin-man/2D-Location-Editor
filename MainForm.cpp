@@ -555,7 +555,7 @@ void __fastcall TEditorForm::NInfoClick(TObject *Sender)
 		}
 	AnSr /= (double) Pl;
 	RadSr /= (double) Pl;
-	String Info = "Размеры: "+IntToStr(Map.Width)+"X"+IntToStr(Map.Height)+" кв.\n"+
+	AnsiString Info = "Размеры: "+IntToStr(Map.Width)+"X"+IntToStr(Map.Height)+" кв.\n"+
 		IntToStr(Wei)+"X"+IntToStr(Hei)+" метров.\n"+
 		"Площадь="+IntToStr(Pl)+" кв.\n"+IntToStr(Wei*Hei)+" метров кв.\n"+
 		"Средняя аномальность="+FloatToStrF(AnSr, ffGeneral, 5, 5)+"%.\n"+
