@@ -17,12 +17,14 @@
 #include <ToolWin.hpp>
 #include <ButtonGroup.hpp>
 #include "Map.h"
+#include "FormCreate.h"
 #include <Buttons.hpp>
 #include <ExtActns.hpp>
 #include <Graphics.hpp>
-//---------------------------------------------------------------------------
+#include <System.Actions.hpp>
 
-const int TILESIZE = 10;
+//const int TILESIZE = 10;
+int const METERS = 40;
 //MAPS Maps;
 TMap Map;
 int const STX = 1;
@@ -33,91 +35,142 @@ int const SR = 3;
 int const SA = 4;
 int const PANELSCHOP = 62;
 int const UNDOTILELIMIT = 128;
+
+//---------------------------------------------------------------------------
 class TEditorForm : public TForm
 {
 __published:	// IDE-managed Components
-	TImageList *Tiles;
-	TImageList *TriggersIm;
-	TImageList *ButtonsImages;
-	TActionList *ActionList1;
-	TAction *FileNew;
-	TFileOpen *FileOpen;
-	TAction *FileSave;
-	TFileSaveAs *FileSaveAs;
-	TFileExit *FileExit;
-	TAction *ARangeSelect;
-	TAction *ADrawGrid;
-	TAction *ADrawAnomally;
-	TAction *ADrawRadiation;
-	TAction *ACursorSet;
-	TAction *ACursorAdd;
-	TAction *ACursorDec;
-	TAction *AUndo;
-	TSavePicture *SavePicture1;
-	TAction *ADrawTriggers;
-	TPopupMenu *PopupMenuOut;
-	TMenuItem *NPrewTile;
-	TMenuItem *N6;
-	TMenuItem *NCopy;
 	TMainMenu *MainMenu1;
 	TMenuItem *NFile;
-	TMenuItem *NNew;
+	TDrawGrid *Out;
+	TActionList *ActionList1;
+	TFileOpen *FileOpen;
+	TFileSaveAs *FileSaveAs;
+	TFileExit *FileExit;
 	TMenuItem *NOpen1;
 	TMenuItem *NSave;
-	TMenuItem *NSaveAs;
-	TMenuItem *N2;
-	TMenuItem *NExport;
-	TMenuItem *N3;
+	TMenuItem *NNew;
 	TMenuItem *NExit;
-	TMenuItem *NEdit;
-	TMenuItem *NUndo;
-	TMenuItem *NDebug;
-	TMenuItem *NReplace;
-	TMenuItem *NRun;
-	TMenuItem *NInfo;
-	TMenuItem *NTestAnom;
-	TMenuItem *NHelp;
-	TMenuItem *NAbout;
+	TStatusBar *StatusBar;
 	TToolBar *ToolBar1;
+	TImageList *ButtonsImages;
 	TToolButton *NewBtn;
 	TToolButton *OpenBtn;
 	TToolButton *SaveBtn;
 	TToolButton *ToolButton4;
-	TToolButton *CellBtn;
-	TToolButton *RangeBtn;
-	TToolButton *ToolButton5;
-	TToolButton *DrawGridBtn;
-	TToolButton *DrawAnomallyBtn;
-	TToolButton *DrawRadiationBtn;
-	TToolButton *DrawTrigBtn;
-	TStatusBar *StatusBar;
 	TCategoryPanelGroup *CategoryPanelGroup1;
 	TCategoryPanel *PanelTile;
 	TButtonGroup *PTiles;
+	TSplitter *Splitter1;
+	TImageList *Tiles;
+	TAction *FileNew;
 	TCategoryPanel *PanelAR;
+	TToolButton *CellBtn;
+	TToolButton *RangeBtn;
+	TAction *ARangeSelect;
+	TToolButton *ToolButton5;
+	TToolButton *DrawGridBtn;
+	TPopupMenu *PopupMenuTile;
+	TMenuItem *NTilesNames;
+	TAction *ADrawGrid;
+	TAction *FileSave;
+	TMenuItem *NSaveAs;
 	TRadioButton *AR0;
 	TRadioButton *AR100;
 	TRadioButton *ARRandom;
+	TToolButton *DrawRadiationBtn;
+	TToolButton *DrawAnomallyBtn;
+	TMenuItem *NEdit;
+	TMenuItem *NUndo;
+	TAction *ADrawAnomally;
+	TAction *ADrawRadiation;
+	TCategoryPanel *PanelTriggers;
+	TAction *ACursorSet;
 	TPanel *Panel1;
 	TToolBar *ToolBar2;
 	TToolButton *ARSetBtn;
 	TToolButton *ARAddBtn;
 	TToolButton *ARDecBtn;
-	TRadioGroup *AR;
-	TCategoryPanel *PanelTriggers;
-	TButtonGroup *PTriggers;
-	TSplitter *Splitter1;
-	TDrawGrid *Out;
+	TAction *ACursorAdd;
+	TAction *ACursorDec;
+	TPopupMenu *PopupMenuOut;
+	TMenuItem *N6;
+	TMenuItem *NPrewTile;
+	TMenuItem *NDebug;
+	TMenuItem *NRun;
+	TMenuItem *NTestAnom;
+	TMenuItem *NInfo;
 	TPanel *DebugPanel;
-	TLabel *DebugLabel;
-	TImage *NullTile;
 	TMemo *Memo1;
+	TLabel *DebugLabel;
+	TMenuItem *NHelp;
+	TMenuItem *NAbout;
+	TAction *AUndo;
+	TMenuItem *NExport;
+	TMenuItem *N2;
+	TMenuItem *N3;
+	TSavePicture *SavePicture1;
+	TImage *NullTile;
+	TRadioGroup *AR;
+	TButtonGroup *PTriggers;
+	TMenuItem *NReplace;
+	TMenuItem *NCopy;
+	TImageList *TriggersIm;
+	TToolButton *DrawTrigBtn;
+	TAction *ADrawTriggers;
 	TCheckBox *openTRIG;
+	TEdit *ARPowerE;
+	TUpDown *ARPower;
+	TMenuItem *N1;
+	TMenuItem *NCurrTile;
+	TToolButton *ToolButton1;
+	TAction *AGrid40;
+	void __fastcall PTilesButtonClicked(TObject *Sender, int Index);
+	void __fastcall OutDrawCell(TObject *Sender, int ACol, int ARow, TRect &Rect,
+          TGridDrawState State);
+	void __fastcall OutSelectCell(TObject *Sender, int ACol, int ARow, bool &CanSelect);
+	void __fastcall OutClick(TObject *Sender);
+	void __fastcall OutMouseActivate(TObject *Sender, TMouseButton Button,
+          TShiftState Shift, int X, int Y, int HitTest, TMouseActivate &MouseActivate);
+	void __fastcall NTilesNamesClick(TObject *Sender);
+	void __fastcall OutMouseMove(TObject *Sender, TShiftState Shift, int X,
+          int Y);
+	void __fastcall ADrawGridExecute(TObject *Sender);
+	void __fastcall OutMouseLeave(TObject *Sender);
+	void __fastcall OutKeyPress(TObject *Sender, wchar_t &Key);
+	void __fastcall PanelTileExpand(TObject *Sender);
+	void __fastcall PanelARExpand(TObject *Sender);
+	void __fastcall ADrawAnomallyExecute(TObject *Sender);
+	void __fastcall ADrawRadiationExecute(TObject *Sender);
+	void __fastcall PanelTriggersExpand(TObject *Sender);
+	void __fastcall AR0Click(TObject *Sender);
+	void __fastcall AR100Click(TObject *Sender);
+	void __fastcall ARRandomClick(TObject *Sender);
+	void __fastcall ACursorSetExecute(TObject *Sender);
+	void __fastcall ACursorAddExecute(TObject *Sender);
+	void __fastcall ACursorDecExecute(TObject *Sender);
+	void __fastcall NPrewTileClick(TObject *Sender);
+	void __fastcall NDebugClick(TObject *Sender);
+	void __fastcall NTestAnomClick(TObject *Sender);
+	void __fastcall NInfoClick(TObject *Sender);
+	void __fastcall OutKeyDown(TObject *Sender, WORD &Key, TShiftState Shift);
+	void __fastcall AUndoExecute(TObject *Sender);
+	void __fastcall NExportClick(TObject *Sender);
+	void __fastcall ARClick(TObject *Sender);
+	void __fastcall NReplaceClick(TObject *Sender);
+	void __fastcall NCopyClick(TObject *Sender);
+	void __fastcall ADrawTriggersExecute(TObject *Sender);
+	void __fastcall PTriggersButtonClicked(TObject *Sender, int Index);
+	void __fastcall openTRIGClick(TObject *Sender);
 	void __fastcall FileNewExecute(TObject *Sender);
 	void __fastcall FileSaveExecute(TObject *Sender);
 	void __fastcall FileOpenAccept(TObject *Sender);
 	void __fastcall FileSaveAsAccept(TObject *Sender);
 	void __fastcall ARangeSelectExecute(TObject *Sender);
+	void __fastcall ARPowerEChange(TObject *Sender);
+	void __fastcall NCurrTileClick(TObject *Sender);
+	void __fastcall AGrid40Execute(TObject *Sender);
+
 private:	// User declarations
 	int FSelRad;
 	int FSelAnom;
@@ -129,6 +182,7 @@ public:		// User declarations
 	void Ready(bool State);
 	int SelTile;
 	int PrewTile;
+	int SelectedTile;
 	bool Painting;
 	bool RangeSelect;
 	bool DrawGrid;
@@ -137,6 +191,7 @@ public:		// User declarations
 	bool DrawRad;
 	bool DrawTrig;
 	int SelTrig;
+	int ImagesSquareLen;
 	__property int SelRad = {read=FSelRad, write=SetSelRad};
 	__property int SelAnom = {read=FSelAnom, write=SetSelAnom};
 	TColor ColorAnom;
@@ -172,6 +227,15 @@ public:		// User declarations
 	} Undo[UNDOTILELIMIT];
 	int UndoCurr;
 	TRect Copy;
+	int Fdraws;
+	__property int draws = {read=Fdraws, write=Setdraws};
+	void Setdraws(int Adraws)
+	{
+		Fdraws = Adraws;
+		//Draws->Caption = Fdraws;
+	}
+	bool DrawTile;
+	bool DrawGrid40;
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TEditorForm *EditorForm;

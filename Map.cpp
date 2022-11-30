@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
 //#include <ustring.h>
-#include <System.hpp>
+//#include <System.hpp>
 #include <stdio.h>
 #include <Graphics.hpp>
 //#include <SysUtils.hpp>
@@ -17,7 +17,8 @@ int TMap::GetLocationIndex(char ident)
 //-------------------------------------------------------------------
 __fastcall TMap::TMap()
 {
-	FHeight = FWidth = 0;
+	FHeight = 0;
+	FWidth = 0;
 	Cell = NULL;
 	UndefindedId = 0;
 	file = NULL;
@@ -62,9 +63,9 @@ void TMap::Clear()
 		}
 }
 //-------------------------------------------------------------------
-bool TMap::Open(UnicodeString FileName)
+bool TMap::Open(AnsiString FileName)
 {
-	FILE *fp = fopen (FileName.c_str(), "r");
+	FILE *fp = fopen(FileName.c_str(), "rb");
 	if (!fp)
 	{
 		fclose(fp);
@@ -73,7 +74,7 @@ bool TMap::Open(UnicodeString FileName)
 	int W, H;
 	fread(&W, sizeof(int), 1, fp);
 	fread(&H, sizeof(int), 1, fp);
-	if ((W>1000)||(H>1000)||(W<0)||(H<0))
+	if ((W>9000)||(H>9000)||(W<0)||(H<0))
 	{
 		fclose(fp);
 		throw (ERangeError("Out of range"));
@@ -83,11 +84,9 @@ bool TMap::Open(UnicodeString FileName)
 	for (int i = 0; i < Map.FWidth; ++i)
 		for (int j = 0; j < Map.FHeight; ++j)
 		{
-			fread(&Map.Cell[i][j].Ident, sizeof(char), 1, fp);
+			fread(&Map.Cell[i][j].Ident, sizeof(wchar_t), 1, fp);
 			fread(&Map.Cell[i][j].Radiation, sizeof(unsigned char), 1, fp);
 			fread(&Map.Cell[i][j].Anomally, sizeof(unsigned char), 1, fp);
-			Map.Cell[i][j].Radiation -= OSHIFT;
-			Map.Cell[i][j].Anomally -= OSHIFT;
 			Map.Cell[i][j].Image = GetLocationIndex(Map.Cell[i][j].Ident);//   ConvertIdent();
 			Map.Cell[i][j].ColorAnom = GetAnomallyColor(Map.Cell[i][j].Anomally);
 			Map.Cell[i][j].ColorRad = GetRadiationColor(Map.Cell[i][j].Radiation);
@@ -97,57 +96,52 @@ bool TMap::Open(UnicodeString FileName)
 	{
 		int TriggersCount = 0;
 		fread(&TriggersCount, sizeof(int), 1, fp);
-		//int c,r;
 		for (int i = 0; i < TriggersCount; ++i)
 		{
 			fread(&W, sizeof(int), 1, fp);
 			fread(&H, sizeof(int), 1, fp);
-			fread(&Map.Cell[W-OSHIFT][H-OSHIFT].Triggger, sizeof(int), 1, fp);
-			Map.Cell[W-OSHIFT][H-OSHIFT].Triggger -= OSHIFT;
+			fread(&Map.Cell[W][H].Triggger, sizeof(int), 1, fp);
 		}         //*/
 	}
 	fclose(fp);
 	return true;
  }
 //-------------------------------------------------------------------
-bool TMap::Save(UnicodeString FileName)    //Функция сохраняет список в бинарный файл
+bool TMap::Save(AnsiString FileName)    //Функция сохраняет список в бинарный файл
 {
-	FILE *fp = fopen (FileName.c_str(), "w");
+	FILE *fp = fopen (FileName.c_str(), "wb");
 	if (!fp)
 	{
 		fclose(fp);
 		//throw (EFOpenError("File Open Error"));
 		return false;
 	}
+	//int ww = FWidth*2; 	int hh = FHeight; bool x2 = true;
 	fwrite(&FWidth, sizeof(int), 1, fp);
 	fwrite(&FHeight, sizeof(int), 1, fp);
-	unsigned char R,A;
 	int TriggersCount = 0;
 	for (int i = 0; i < Map.FWidth; ++i)
+	{
 		for (int j = 0; j < Map.FHeight; ++j)
 		{
-			fwrite(&Map.Cell[i][j].Ident, sizeof(char), 1, fp);
-			R = Map.Cell[i][j].Radiation + SSHIFT;
-			A = Map.Cell[i][j].Anomally + SSHIFT;
-			fwrite(&R, sizeof(unsigned char), 1, fp);
-			fwrite(&A, sizeof(unsigned char), 1, fp);
+			fwrite(&Map.Cell[i][j].Ident, sizeof(wchar_t), 1, fp);
+			fwrite(&Map.Cell[i][j].Radiation, sizeof(unsigned char), 1, fp);
+			fwrite(&Map.Cell[i][j].Anomally, sizeof(unsigned char), 1, fp);
 			if (Map.Cell[i][j].Triggger > 0)
 				TriggersCount++;
 		}
-
+		//if (x2) i--;		x2 = !x2;
+	}
 	if (DebugOpenTrig)
 	{
-		unsigned int I,J,T;
 		fwrite(&TriggersCount, sizeof(int), 1, fp);
 		for (int i = 0; i < Map.FWidth; ++i)
 			for (int j = 0; j < Map.FHeight; ++j)
 				if (Map.Cell[i][j].Triggger > 0)
 				{
-					I = i + SSHIFT; J = j + SSHIFT;
-					T = Map.Cell[i][j].Triggger + SSHIFT;
-					fwrite(&I, sizeof(int), 1, fp);
-					fwrite(&J, sizeof(int), 1, fp);
-					fwrite(&T, sizeof(int), 1, fp);
+					fwrite(&i, sizeof(int), 1, fp);
+					fwrite(&j, sizeof(int), 1, fp);
+					fwrite(&Map.Cell[i][j].Triggger, sizeof(int), 1, fp);
 					//T = Map.Cell[i][j].Triggger + SSHIFT;
 					//fwrite(&T, sizeof(unsigned char), 1, fp);
 				}
@@ -252,7 +246,7 @@ void TMap::AnomallyRun() //[W][H]
 		}
 }
 //-------------------------------------------------------------------
-void TMap::LoadTiles(const UnicodeString FileName)
+void TMap::LoadTiles(const String FileName)
 {
 	file = new TStringList;
 	try
@@ -262,6 +256,12 @@ void TMap::LoadTiles(const UnicodeString FileName)
 	{
 		throw;
 	}
+	for (int i = 0; i < file->Count; ++i)
+		if (file->Strings[i].Length() <= 1)
+		{
+			file->Delete(i);
+			i--;
+		}
 	TilesCount = file->Count;
 	Idents = new wchar_t[TilesCount];
 	for (int i = 0; i < TilesCount; i++)

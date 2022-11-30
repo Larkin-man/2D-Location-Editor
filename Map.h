@@ -1,10 +1,8 @@
 //---------------------------------------------------------------------------
+//Мапер 10х10 пикселей
 #ifndef MapH
 #define MapH
 //---------------------------------------------------------------------------
-int const METERS = 40;
-unsigned char const OSHIFT = 32;
-unsigned char const SSHIFT = 32;
 
 TColor SetRGBint(int Red, int Green, int Blue)//макс 255
 {
@@ -22,26 +20,26 @@ class TMap
 {
 private:
 	int FHeight, FWidth;
-	wchar_t *Idents;
-	TStringList *file;
+
 protected:
 	wchar_t GetTile(int i) const	{  return Idents[i];   }
 	UnicodeString GetTileName(int i) { return file->Values[Idents[i]]; }
 public:
-
+	wchar_t *Idents;
+	TStringList *file;
 	typedef struct
 	{
-		int Image;
 		wchar_t Ident;
 		unsigned char Radiation;
 		unsigned char Anomally;
+		int Image;
 		TColor ColorRad;
 		TColor ColorAnom;
+		int Triggger;
+		bool AnomTest;
 		///void ConvertIdent()	{	Image = GetLocationIndex(Ident); }
 		void SetRadiation(int iRadiation);
 		void SetAnomally(int iAnomally);
-		bool AnomTest;
-		int Triggger;
 	} TCell;
 	void Create(int Width, int Height);    //init
 	void Clear();
@@ -54,8 +52,8 @@ public:
 	__fastcall ~TMap();
 	static TColor GetAnomallyColor(int Power);
 	static TColor GetRadiationColor(int Power);
-	bool Open(UnicodeString FileName); //Функция загружает список из бинарного файла
-	bool Save(UnicodeString FileName);
+	bool Open(AnsiString FileName); //Функция загружает список из бинарного файла
+	bool Save(AnsiString FileName);
 	void AnomallyRun();
 	//Base Tiles
 	void LoadTiles(const UnicodeString FileName);
