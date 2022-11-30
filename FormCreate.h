@@ -9,14 +9,17 @@
 #include <Forms.hpp>
 #include <Buttons.hpp>
 #include <ComCtrls.hpp>
+#include <ExtCtrls.hpp>
 //---------------------------------------------------------------------------
 class TCreateForm : public TForm
 {
 __published:	// IDE-managed Components
 	TBitBtn *BitBtn1;
 	TBitBtn *BitBtn2;
-	TLabel *Label1;
-	TLabel *Label2;
+	TLabeledEdit *LabeledEdit1;
+	TLabeledEdit *LabeledEdit2;
+	TUpDown *H;
+	TUpDown *W;
 	void __fastcall BitBtn2Click(TObject *Sender);
 private:	// User declarations
 public:		// User declarations

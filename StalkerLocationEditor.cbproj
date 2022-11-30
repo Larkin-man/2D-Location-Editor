@@ -1,9 +1,9 @@
 ﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 		<PropertyGroup>
-			<ProjectGuid>{95D06487-6597-4AF8-B79C-9F62805D48CE}</ProjectGuid>
+			<ProjectGuid>{AB5E50C8-271F-46C0-8272-CFE0E2AC77B5}</ProjectGuid>
 			<ProjectVersion>12.0</ProjectVersion>
 			<MainSource>StalkerLocationEditor.cpp</MainSource>
-			<Config Condition="'$(Config)'==''">Debug</Config>
+			<Config Condition="'$(Config)'==''">Release</Config>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
 			<Base>true</Base>
@@ -19,9 +19,10 @@
 			<Base>true</Base>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Base)'!=''">
+			<LinkPackageStatics>rtl.lib;vcl.lib</LinkPackageStatics>
 			<Multithreaded>true</Multithreaded>
-			<PackageImports>vclx.bpi;vcl.bpi;dbrtl.bpi;Rave76VCL.bpi;bdertl.bpi;rtl.bpi;vclactnband.bpi;xmlrtl.bpi;vclribbon.bpi;bcbie.bpi;vcldb.bpi;vcldbx.bpi;dsnap.bpi;dsnapcon.bpi;vclib.bpi;ibxpress.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;vclie.bpi;webdsnap.bpi;inet.bpi;inetdbbde.bpi;inetdbxpress.bpi;soaprtl.bpi;dbexpress.bpi;DbxCommonDriver.bpi;DataSnapIndy10ServerTransport.bpi;DataSnapProviderClient.bpi;DataSnapServer.bpi;DbxClientDriver.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;dbxcds.bpi;DBXSybaseASEDriver.bpi;DBXSybaseASADriver.bpi;DBXOracleDriver.bpi;DBXMSSQLDriver.bpi;DBXInformixDriver.bpi;DBXDb2Driver.bpi;IndyProtocols.bpi;TeeUI.bpi;TeeDB.bpi;Tee.bpi;intrawebdb_100_120.bpi;Intraweb_100_120.bpi;websnap.bpi;bcbsmp.bpi</PackageImports>
 			<ProjectType>CppVCLApplication</ProjectType>
+			<PackageImports>vclx.bpi;vcl.bpi;dbrtl.bpi;Rave76VCL.bpi;bdertl.bpi;rtl.bpi;vclactnband.bpi;xmlrtl.bpi;vclribbon.bpi;bcbie.bpi;vcldb.bpi;vcldbx.bpi;dsnap.bpi;dsnapcon.bpi;vclib.bpi;ibxpress.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;vclie.bpi;webdsnap.bpi;inet.bpi;inetdbbde.bpi;inetdbxpress.bpi;soaprtl.bpi;dbexpress.bpi;DbxCommonDriver.bpi;DataSnapIndy10ServerTransport.bpi;DataSnapProviderClient.bpi;DataSnapServer.bpi;DbxClientDriver.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;dbxcds.bpi;DBXSybaseASEDriver.bpi;DBXSybaseASADriver.bpi;DBXOracleDriver.bpi;DBXMSSQLDriver.bpi;DBXInformixDriver.bpi;DBXDb2Driver.bpi;IndyProtocols.bpi;TeeUI.bpi;TeeDB.bpi;Tee.bpi;intrawebdb_100_120.bpi;Intraweb_100_120.bpi;websnap.bpi;bcbsmp.bpi</PackageImports>
 			<OutputExt>exe</OutputExt>
 			<AllPackageLibs>rtl.lib;vcl.lib</AllPackageLibs>
 			<ILINK_CaseSensitive>true</ILINK_CaseSensitive>
@@ -63,18 +64,28 @@
 			<TASM_Debugging>None</TASM_Debugging>
 		</PropertyGroup>
 		<ItemGroup>
-			<CppCompile Include="MainForm.cpp">
-				<Form>EditorForm</Form>
-				<DependentOn>MainForm.h</DependentOn>
-				<BuildOrder>2</BuildOrder>
+			<CppCompile Include="StalkerLocationEditor.cpp">
+				<BuildOrder>0</BuildOrder>
 			</CppCompile>
 			<ResFiles Include="StalkerLocationEditor.res">
 				<BuildOrder>1</BuildOrder>
 			</ResFiles>
-			<CppCompile Include="StalkerLocationEditor.cpp">
-				<BuildOrder>0</BuildOrder>
+			<CppCompile Include="Map.cpp">
+				<DependentOn>Map.h</DependentOn>
+				<BuildOrder>2</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="MainForm.cpp">
+				<Form>EditorForm</Form>
+				<DependentOn>MainForm.h</DependentOn>
+				<BuildOrder>3</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="FormCreate.cpp">
+				<Form>CreateForm</Form>
+				<DependentOn>FormCreate.h</DependentOn>
+				<BuildOrder>4</BuildOrder>
 			</CppCompile>
 			<FormResources Include="MainForm.dfm"/>
+			<FormResources Include="FormCreate.dfm"/>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>
 			</BuildConfiguration>
@@ -97,13 +108,13 @@
 						<Source Name="MainSource">StalkerLocationEditor.cpp</Source>
 					</Source>
 					<VersionInfo>
-						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">True</VersionInfo>
 						<VersionInfo Name="AutoIncBuild">True</VersionInfo>
 						<VersionInfo Name="MajorVer">1</VersionInfo>
 						<VersionInfo Name="MinorVer">0</VersionInfo>
 						<VersionInfo Name="Release">0</VersionInfo>
-						<VersionInfo Name="Build">63</VersionInfo>
-						<VersionInfo Name="Debug">True</VersionInfo>
+						<VersionInfo Name="Build">55</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
 						<VersionInfo Name="PreRelease">False</VersionInfo>
 						<VersionInfo Name="Special">False</VersionInfo>
 						<VersionInfo Name="Private">False</VersionInfo>
@@ -114,13 +125,13 @@
 					<VersionInfoKeys>
 						<VersionInfoKeys Name="CompanyName"/>
 						<VersionInfoKeys Name="FileDescription"/>
-						<VersionInfoKeys Name="FileVersion">1.0.0.63</VersionInfoKeys>
-						<VersionInfoKeys Name="InternalName"/>
-						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.55</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName">Stalker Location Editor</VersionInfoKeys>
+						<VersionInfoKeys Name="LegalCopyright">Larkin</VersionInfoKeys>
 						<VersionInfoKeys Name="LegalTrademarks"/>
-						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="OriginalFilename">StalkerLocationEditor.exe</VersionInfoKeys>
 						<VersionInfoKeys Name="ProductName"/>
-						<VersionInfoKeys Name="ProductVersion">1.0.0.34</VersionInfoKeys>
+						<VersionInfoKeys Name="ProductVersion">1.0</VersionInfoKeys>
 						<VersionInfoKeys Name="Comments">Larkinman@mail.ru</VersionInfoKeys>
 					</VersionInfoKeys>
 					<Debugging>

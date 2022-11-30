@@ -18,20 +18,6 @@ object CreateForm: TCreateForm
     86)
   PixelsPerInch = 96
   TextHeight = 19
-  object Label1: TLabel
-    Left = 16
-    Top = 11
-    Width = 64
-    Height = 19
-    Caption = #1064#1080#1088#1080#1085#1072':'
-  end
-  object Label2: TLabel
-    Left = 18
-    Top = 46
-    Width = 58
-    Height = 19
-    Caption = #1042#1099#1089#1086#1090#1072':'
-  end
   object BitBtn1: TBitBtn
     Left = 186
     Top = 8
@@ -54,5 +40,51 @@ object CreateForm: TCreateForm
     ParentDoubleBuffered = False
     TabOrder = 1
     OnClick = BitBtn2Click
+  end
+  object LabeledEdit1: TLabeledEdit
+    Left = 88
+    Top = 8
+    Width = 49
+    Height = 27
+    EditLabel.Width = 64
+    EditLabel.Height = 19
+    EditLabel.Caption = #1064#1080#1088#1080#1085#1072':'
+    LabelPosition = lpLeft
+    NumbersOnly = True
+    TabOrder = 2
+    Text = '3'
+  end
+  object LabeledEdit2: TLabeledEdit
+    Left = 88
+    Top = 41
+    Width = 49
+    Height = 27
+    EditLabel.Width = 58
+    EditLabel.Height = 19
+    EditLabel.Caption = #1042#1099#1089#1086#1090#1072':'
+    LabelPosition = lpLeft
+    NumbersOnly = True
+    TabOrder = 3
+    Text = '3'
+  end
+  object H: TUpDown
+    Left = 137
+    Top = 41
+    Width = 18
+    Height = 27
+    Associate = LabeledEdit2
+    Max = 9999
+    Position = 3
+    TabOrder = 4
+  end
+  object W: TUpDown
+    Left = 137
+    Top = 8
+    Width = 18
+    Height = 27
+    Associate = LabeledEdit1
+    Max = 9999
+    Position = 3
+    TabOrder = 5
   end
 end
