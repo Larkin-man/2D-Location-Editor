@@ -52,7 +52,7 @@ object CreateForm: TCreateForm
     LabelPosition = lpLeft
     NumbersOnly = True
     TabOrder = 2
-    Text = '20'
+    Text = '3'
   end
   object LabeledEdit2: TLabeledEdit
     Left = 88
@@ -65,7 +65,7 @@ object CreateForm: TCreateForm
     LabelPosition = lpLeft
     NumbersOnly = True
     TabOrder = 3
-    Text = '30'
+    Text = '3'
   end
   object H: TUpDown
     Left = 137
@@ -73,7 +73,8 @@ object CreateForm: TCreateForm
     Width = 18
     Height = 27
     Associate = LabeledEdit2
-    Position = 30
+    Max = 9999
+    Position = 3
     TabOrder = 4
   end
   object W: TUpDown
@@ -82,7 +83,8 @@ object CreateForm: TCreateForm
     Width = 18
     Height = 27
     Associate = LabeledEdit1
-    Position = 20
+    Max = 9999
+    Position = 3
     TabOrder = 5
   end
 end
