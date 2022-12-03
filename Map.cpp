@@ -181,10 +181,12 @@ bool TMap::Save(String FileName)    //Функция сохраняет список в бинарный файл
 		//throw (EFOpenError("File Open Error"));
 		return false;
 	}
+	//int ww = FWidth*2; 	int hh = FHeight; bool x2 = true;
 	fwrite(&FWidth, sizeof(int), 1, fp);
 	fwrite(&FHeight, sizeof(int), 1, fp);
 	int TriggersCount = 0;
 	for (int i = 0; i < Map.FWidth; ++i)
+	{
 		for (int j = 0; j < Map.FHeight; ++j)
 		{
 			//strncpy(Map.Cell[i][j].Ident, Map.Idents[Map.Cell[i][j].Image], SYMBCOUNT);
@@ -199,7 +201,8 @@ bool TMap::Save(String FileName)    //Функция сохраняет список в бинарный файл
 			if (Map.Cell[i][j].Triggger > 0)
 				TriggersCount++;
 		}
-
+		//if (x2) i--;		x2 = !x2;
+	}
 	if (DebugOpenTrig)
 	{
 		fwrite("TRIGS", sizeof(char), 5, fp);

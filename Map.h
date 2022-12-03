@@ -1,4 +1,5 @@
 //---------------------------------------------------------------------------
+
 #ifndef MapH
 #define MapH
 #include <vector>
@@ -34,6 +35,7 @@ class TMap
 {
 private:
 	int FHeight, FWidth;
+
 protected:
 	tileidnl* GetTile(int i) const	{  return &Idents[i];   }
 	String GetTileName(int i)
@@ -47,6 +49,7 @@ protected:
 	return 	file->Values[Idents[i]];
 	}
 public:
+
 	tileidnl *Idents;
 	TStringList *file;
 	struct TSprite
@@ -92,8 +95,8 @@ public:
 	__fastcall ~TMap();
 	static TColor GetAnomallyColor(int Power);
 	static TColor GetRadiationColor(int Power);
-	bool Open(UnicodeString FileName); //Функция загружает список из бинарного файла
-	bool Save(UnicodeString FileName);
+	bool Open(AnsiString FileName); //Функция загружает список из бинарного файла
+	bool Save(AnsiString FileName);
 	void AnomallyRun();
 	//Base Tiles
 	void LoadTiles(const UnicodeString FileName);

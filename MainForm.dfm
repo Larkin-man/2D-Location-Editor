@@ -31,6 +31,42 @@ object EditorForm: TEditorForm
     ExplicitTop = 152
     ExplicitHeight = 100
   end
+  object Out: TDrawGrid
+    AlignWithMargins = True
+    Left = 2
+    Top = 30
+    Width = 346
+    Height = 502
+    Cursor = crArrow
+    Margins.Left = 2
+    Margins.Top = 2
+    Margins.Right = 2
+    Margins.Bottom = 2
+    Align = alClient
+    BevelInner = bvNone
+    BevelKind = bkSoft
+    BevelOuter = bvRaised
+    BorderStyle = bsNone
+    Color = clInactiveBorder
+    ColCount = 1
+    DefaultColWidth = 10
+    DefaultRowHeight = 10
+    Enabled = False
+    FixedCols = 0
+    RowCount = 1
+    FixedRows = 0
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goThumbTracking]
+    PopupMenu = PopupMenuOut
+    TabOrder = 2
+    OnClick = OutClick
+    OnDrawCell = OutDrawCell
+    OnKeyDown = OutKeyDown
+    OnKeyPress = OutKeyPress
+    OnMouseActivate = OutMouseActivate
+    OnMouseLeave = OutMouseLeave
+    OnMouseMove = OutMouseMove
+    OnSelectCell = OutSelectCell
+  end
   object StatusBar: TStatusBar
     Left = 0
     Top = 534
@@ -204,6 +240,99 @@ object EditorForm: TEditorForm
       TickMarks = tmBoth
       TickStyle = tsNone
       OnChange = ScalerChange
+    end
+  end
+  object ToolBar1: TToolBar
+    Left = 0
+    Top = 0
+    Width = 533
+    Height = 28
+    ButtonHeight = 24
+    ButtonWidth = 24
+    DrawingStyle = dsGradient
+    EdgeBorders = [ebTop, ebBottom]
+    Flat = False
+    HotTrackColor = 16048601
+    Images = ButtonsImages
+    List = True
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 0
+    Transparent = False
+    object NewBtn: TToolButton
+      Left = 0
+      Top = 0
+      Action = FileNew
+    end
+    object OpenBtn: TToolButton
+      Left = 24
+      Top = 0
+      Action = FileOpen
+    end
+    object SaveBtn: TToolButton
+      Left = 48
+      Top = 0
+      Action = FileSave
+      Marked = True
+    end
+    object ToolButton4: TToolButton
+      Left = 72
+      Top = 0
+      Width = 8
+      Caption = 'ToolButton4'
+      ImageIndex = 3
+      Style = tbsSeparator
+    end
+    object CellBtn: TToolButton
+      Left = 80
+      Top = 0
+      Hint = #1054#1076#1080#1085#1086#1095#1085#1099#1081' '#1074#1099#1073#1086#1088'|'#1042#1099#1073#1088#1072#1090#1100' '#1086#1076#1085#1091' '#1103#1095#1077#1081#1082#1091
+      Action = ARangeSelect
+      ImageIndex = 7
+    end
+    object RangeBtn: TToolButton
+      Left = 104
+      Top = 0
+      Hint = #1052#1085#1086#1078#1077#1089#1090#1074#1077#1085#1085#1099#1081' '#1074#1099#1073#1086#1088'|'#1042#1099#1073#1088#1072#1090#1100' '#1075#1088#1091#1087#1087#1091' '#1103#1095#1077#1077#1082' '
+      Action = ARangeSelect
+      ImageIndex = 8
+    end
+    object ToolButton5: TToolButton
+      Left = 128
+      Top = 0
+      Width = 8
+      Caption = 'ToolButton5'
+      ImageIndex = 5
+      Style = tbsSeparator
+    end
+    object DrawGridBtn: TToolButton
+      Left = 136
+      Top = 0
+      Action = ADrawGrid
+      Style = tbsCheck
+    end
+    object ToolButton1: TToolButton
+      Left = 160
+      Top = 0
+      Action = AGrid40
+    end
+    object DrawAnomallyBtn: TToolButton
+      Left = 184
+      Top = 0
+      Action = ADrawAnomally
+      Style = tbsCheck
+    end
+    object DrawRadiationBtn: TToolButton
+      Left = 208
+      Top = 0
+      Action = ADrawRadiation
+      Style = tbsCheck
+    end
+    object DrawTrigBtn: TToolButton
+      Left = 232
+      Top = 0
+      Action = ADrawTriggers
+      Style = tbsCheck
     end
   end
   object CategoryPanelGroup1: TCategoryPanelGroup
@@ -877,7 +1006,6 @@ object EditorForm: TEditorForm
       end
       object NAbout: TMenuItem
         Caption = #1054' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
-        OnClick = NAboutClick
       end
     end
   end
@@ -1818,7 +1946,8 @@ object EditorForm: TEditorForm
       C003000380018001C003000180018001C003000180018001C003000080018001
       C003000080018001C003000080018001C003000080018001C003000080018001
       C003000380019009C003000380019009C003000380019FF9C003000390099FF9
-      C007FC0780018001C00FFFFFFFFFFFFF}
+      C007FC0780018001C00FFFFFFFFFFFFF00000000000000000000000000000000
+      000000000000}
   end
   object Tiles: TImageList
     AllocBy = 8

@@ -239,6 +239,7 @@ public:		// User declarations
 	bool DrawRad;
 	bool DrawTrig;
 	int SelTrig;
+	int ImagesSquareLen;
 	__property int SelRad = {read=FSelRad, write=SetSelRad};
 	__property int SelAnom = {read=FSelAnom, write=SetSelAnom};
 	TColor ColorAnom;
